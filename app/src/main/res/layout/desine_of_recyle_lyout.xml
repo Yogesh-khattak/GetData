@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/c"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        app:cardCornerRadius="5dp">
+
+        <TextView
+            android:id="@+id/tname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Name:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/textlast"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Last:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/textfather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Father:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/textmother"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginLeft="200dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Mother:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/textemail"
+            android:layout_width="198dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:drawableStart="@drawable/ic_email_black_24dp"
+            android:text="Email:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/texaddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="55dp"
+            android:drawableStart="@drawable/ic_add_location_black_24dp"
+            android:text="Address:-"
+            android:textColor="@color/c" />
+
+        <TextView
+            android:id="@+id/textgender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="95dp"
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Gender:-"
+            android:textColor="@color/c" />
+        <TextView
+            android:id="@+id/textData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105dp"
+
+            android:drawableStart="@drawable/ic_person_black_24dp"
+            android:text="Date:-"
+            android:textColor="@color/c" />
+
+
+      <TextView
+            android:id="@+id/textnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="5dp"
+            android:drawableStart="@drawable/ic_phone_iphone_black_24dp"
+            android:text="Number:-"
+            android:textColor="@color/c" />
+        <TextView
+            android:id="@+id/textCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="30dp"
+            android:drawableStart="@drawable/ic_add_location_black_24dp"
+            android:text="Country:-"
+            android:textColor="@color/c" />
+
+
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
+</RelativeLayout>
