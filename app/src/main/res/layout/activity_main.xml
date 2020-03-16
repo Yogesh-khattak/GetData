@@ -117,10 +117,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-      <Button
+      <ImageView
             android:id="@+id/imgbtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
           android:layout_marginLeft="60dp"
           android:layout_marginRight="60dp"

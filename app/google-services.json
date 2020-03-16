@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1058501481739-8erkfqilru1uos735c1vrmg8aij517i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yogesh.getdata",
+            "certificate_hash": "92ee1811b9aee6122ee5271bce32e5ec101c4e7e"
+          }
+        },
+        {
           "client_id": "1058501481739-us5rtfeqj5gu8pgms92su9mvbhqar63o.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -23,6 +23,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.yogesh.getdata.pojo.User;
 
 import java.io.FileNotFoundException;
@@ -32,17 +35,22 @@ public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMG = 123;
     EditText et,et1,et2,et3,et4,et5,et6;
     RadioGroup radioGroup;
-    Button btn,imgBtn;
+    Button btn;
+    ImageView imageView;
     ProgressBar progressBar;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Spinner spinner2;
     String[] country = {"India","USA","China","Saudi Arab","iraq","Singapore","Morococco"};
 
+    private StorageReference mStorageRef;
+
+    Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
          et =  findViewById(R.id.editText_name);
         et1 =  findViewById(R.id.editText_last);
        et2 =  findViewById(R.id.editText_father);
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
        et4 =  findViewById(R.id.editText_email);
        et6 =  findViewById(R.id.editText_address);
        et5 =  findViewById(R.id.editText_number);
-        imgBtn =  findViewById(R.id.imgbtn);
+        imageView =  findViewById(R.id.imgbtn);
         radioGroup =  findViewById(R.id.radio_grp);
        progressBar =  findViewById(R.id.progressbar);
         spinner2 =  findViewById(R.id. spinner2);
@@ -112,18 +120,21 @@ public class MainActivity extends AppCompatActivity {
               user.setCountry(country);
 
               addData(user);
-              Intent i  = new Intent(MainActivity.this,Main2Activity.class);
-              startActivity(i);
+
           }
       });
 
 
-        imgBtn.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
-              photoPickerIntent.setType("image/*");
-              startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+//              Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+//              photoPickerIntent.setType("image/*");
+//              startActivityForResult(photoPickerIntent, RESULT_LOAD_IMG);
+              Intent intent = new Intent();
+              intent.setType("image/*");
+              intent.setAction(Intent.ACTION_GET_CONTENT);
+              startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMG);
           }
       });
 
@@ -133,10 +144,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(reqCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             try {
-                final Uri imageUri = data.getData();
+                imageUri = data.getData();
                 final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-               // imageView.setImageBitmap(selectedImage);
+                imageView.setImageBitmap(selectedImage);
+
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
@@ -148,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   public void addData(User user){
+   public void addData(final User user){
         btn.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
         db.collection("users")
@@ -160,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
                         btn.setEnabled(true);
                         progressBar.setVisibility(View.GONE);
                         Toast.makeText(MainActivity.this, "Successfull", Toast.LENGTH_SHORT).show();
+                        if(imageUri!=null) {
+                            uploadImg(imageUri, user.getName());
+                        }
+                        Intent i  = new Intent(MainActivity.this,Main2Activity.class);
+                        startActivity(i);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -171,5 +189,31 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
+    }
+
+    private void uploadImg(Uri file,String name){
+
+        progressBar.setVisibility(View.VISIBLE);
+        StorageReference riversRef = mStorageRef.child("users/"+name+".jpg");
+
+        riversRef.putFile(file)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
