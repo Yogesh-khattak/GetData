@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">GetData</string>
+    <string name="facebook_app_id">238816297253167</string>
+    <string name="fb_login_protocol_scheme">fb238816297253167</string>
+
 </resources>
