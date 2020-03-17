@@ -1,12 +1,15 @@
 package com.yogesh.getdata;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.icu.text.Collator;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     Spinner spinner2;
     String[] country = {"India","USA","China","Saudi Arab","iraq","Singapore","Morococco"};
-
     private StorageReference mStorageRef;
+   ;
 
     Uri imageUri;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         imageView =  findViewById(R.id.imgbtn);
         radioGroup =  findViewById(R.id.radio_grp);
        progressBar =  findViewById(R.id.progressbar);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
         spinner2 =  findViewById(R.id. spinner2);
         ArrayAdapter v =  new ArrayAdapter(this,R.layout.support_simple_spinner_dropdown_item,country);
         v.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
