@@ -19,8 +19,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FacebookAuthCredential;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -55,12 +59,21 @@ public class Main2Activity extends AppCompatActivity {
         int id = item.getItemId();
         if(id==R.id.action_logout){
             FirebaseAuth.getInstance().signOut();
+            if(isFacebookLoggedIn()){
+                LoginManager.getInstance().logOut();
+            }
+
             Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+    private boolean isFacebookLoggedIn(){
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        return isLoggedIn;
     }
 
     @Override
