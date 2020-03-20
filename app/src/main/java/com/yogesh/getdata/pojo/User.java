@@ -17,6 +17,7 @@ public class User {
     private String country;
     @ServerTimestamp
     private Date createDate;
+    private long numId;
 
     public Date getCreateDate() {
         return createDate;
@@ -107,6 +108,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public long getNumId() {
+        return numId;
+    }
+
+    public void setNumId(long numId) {
+        this.numId = numId;
     }
 
     @Override

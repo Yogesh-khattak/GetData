@@ -44,7 +44,7 @@ public class MyAdpater extends RecyclerView.Adapter<MyAdpater.ViewHolder> {
         holder.gender.setText(user.getGender());
         holder.address.setText(user.getAddress());
         holder.country.setText(user.getCountry());
-        holder.date.setText(user.getCreateDate()==null?"":user.getCreateDate().toString());
+        holder.date.setText(user.getCreateDate()==null?"":user.getCreateDate().getTime()%100000000000L+"");
 
 
     }

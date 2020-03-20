@@ -30,9 +30,13 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.yogesh.getdata.pojo.User;
+import com.yogesh.getdata.util.RandomUtil;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
+import java.util.Random;
+import java.util.Timer;
 
 public class MainActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMG = 123;
@@ -45,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner2;
     String[] country = {"India","USA","China","Saudi Arab","iraq","Singapore","Morococco"};
     private StorageReference mStorageRef;
-   ;
 
     Uri imageUri;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -94,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
              number = et5.getText().toString();
              address = et6.getText().toString();
               country = spinner2.getSelectedItem().toString();
-
               RadioButton radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
              gender = radioButton.getText().toString();
 
@@ -123,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
               user.setAddress(address);
               user.setGender(gender);
               user.setCountry(country);
-
-              addData(user);
+              user.setNumId(RandomUtil.getRandomId());
+              //addData(user);
 
           }
       });
